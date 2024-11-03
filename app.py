@@ -7,20 +7,31 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/test-speed')
-def test_speed():
-    try:
-        st = speedtest.Speedtest()
-        st.get_best_server()
+@app.route('/speedtest', methods=['GET'])
+def speed_test():
+    st = speedtest.Speedtest()
+    st.get_best_server()
 
-        download_speed = st.download() / 1_000_000  # Convert to Mbps
-        upload_speed = st.upload() / 1_000_000      # Convert to Mbps
+    # Measure download and upload speeds in Mbps
+    download_speed_mbps = st.download() / 1_000_000  # Convert to Mbps
+    upload_speed_mbps = st.upload() / 1_000_000      # Convert to Mbps
 
-        return render_template('result.html', download=download_speed, upload=upload_speed)
-    except speedtest.SpeedtestBestServerFailure as e:
-        return jsonify({"error": "Unable to connect to servers to test latency."}), 500
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    # Convert to Kbps
+    download_speed_kbps = download_speed_mbps * 1000
+    upload_speed_kbps = upload_speed_mbps * 1000
+
+    # Measure latency
+    latency = st.results.ping  # Get the ping from the results
+
+    return jsonify({
+        'download_mbps': download_speed_mbps,
+        'download_kbps': download_speed_kbps,
+        'upload_mbps': upload_speed_mbps,
+        'upload_kbps': upload_speed_kbps,
+        'latency_unloaded': round(latency, 2),
+        'latency_loaded': round(latency, 2),
+        'ping': round(latency, 2)
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)

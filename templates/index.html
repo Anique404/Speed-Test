@@ -4,38 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internet Speed Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            text-align: center;
+            background-color: white; /* Main background color */
+            color: #fff;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 50px;
+            text-align: center;
         }
-        .button {
-            width: 100px; /* Adjust width for the button */
-            height: 100px; /* Adjust height for the button */
-            background-color: #28a745; /* Green background */
-            color: white;
-            border: none;
-            border-radius: 50%; /* Make the button circular */
-            font-size: 18px;
-            cursor: pointer;
+        header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto; /* Center the button */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add shadow for depth */
+            justify-content: space-between;
+            padding: 20px;
+            background-color: black; /* Header background color */
+            color: white; /* Header text color */
         }
-        .button:hover {
-            background-color: #218838; /* Darker green on hover */
+        header h1 {
+            margin: 0;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .container {
+            margin: 40px auto;
+            max-width: 800px; /* Increased max width for the container */
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+        .card {
+            background-color: black; /* Card background color */
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1;
+            min-width: 200px; /* Minimum width for cards */
+        }
+        .card h2 {
+            margin: 0 0 10px;
+        }
+        .card p {
+            font-size: 24px;
+        }
+        .live-speed {
+            font-size: 30px;
+            color: blue; /* Live speed color */
+            margin: 20px 0;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px; /* Increased padding for larger buttons */
+            border: none;
+            cursor: pointer;
+            font-size: 18px; /* Increased font size */
+            border-radius: 5px;
+            width: 150px; /* Fixed width for buttons */
+        }
+        #startButton {
+            background-color: green; /* Start button color */
+            color: white;
+        }
+        #stopButton {
+            background-color: red; /* Stop button color */
+            color: white;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: black; /* Footer background color */
+            color: white; /* Footer text color */
+        }
+        .latency-info {
+            color: black; /* Set the color for the latency section */
+            margin-top: 20px;
+        }
+        
+        .latency-details {
+            display: flex;
+            flex-direction: row; /* Stack items vertically */
+            align-items: flex-start; /* Align to the left */
+            gap:200px;
+        }
+        
+        .latency-details p {
+            margin: 5px 0; /* Space between lines */
+        }
+        
+        .show-more {
+            margin-top: 20px;
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Internet Speed Test</h1>
-    <p>Click the button below to test your internet speed.</p>
-    <a href="/test-speed">
-        <button class="button">Test Speed</button>
-    </a>
+
+<header>
+    <h1>Speed Test</h1>
+    <a href="/privacy">Privacy</a>
+</header>
+<br>
+<h1 style="color: black;">Internet Speed Tester</h1>
+<br>
+
+<div class="container">
+    <div class="card-container">
+        <div class="card">
+            <h2>Download Speed</h2>
+            <p id="download-speed">---- </p>
+        </div>
+        <div class="card">
+            <h2>Upload Speed</h2>
+            <p id="upload-speed">---- </p>
+        </div>
+    </div>
+    <br><br>
+    <div class="live-speed" id="live-speed">Live Speed: ---- </div>
+    <br>
+    <div class="button-container">
+        <button id="startButton">Start</button>
+        <button id="stopButton" style="display: none;">Stop</button>
+    </div>
+    <br>
+    <div class="show-more" id="showMoreLink">Show More Info</div>
+    <br>
+    
+    <div class="latency-info" id="latency-info" style="display: none;">
+        <h2>Latency</h2>
+        <hr>
+        <div class="latency-details">
+            <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
+            <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
+            <h3>Ping: <span id="ping">-- ms</span></h3>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+<footer>
+    <p>&copy; 2024 Internet Speed Test. All rights reserved.</p>
+</footer>
+
+<script>
+    let testing = false;
+    let liveDownloadSpeed = 0;
+    let downloadInterval;
+
+    document.getElementById('startButton').onclick = function() {
+        if (!testing) {
+            // Reset speeds in the cards and live speed display
+            document.getElementById('download-speed').innerText = '----';
+            document.getElementById('upload-speed').innerText = '----';
+            document.getElementById('live-speed').innerText = 'Live Speed: -- Mbps';
+            document.getElementById('latency-unloaded').innerText = '-- ms';
+            document.getElementById('latency-loaded').innerText = '-- s';
+            document.getElementById('ping').innerText = '-- ms';
+
+            testing = true;
+            this.style.display = 'none';
+            document.getElementById('stopButton').style.display = 'inline';
+            
+            // Start live speed simulation
+            simulateLiveSpeed();
+            
+            // Call the speed test endpoint
+            fetchSpeedTest();
+        }
+    };
+
+    let downloadStartTime; // Track when the download starts
+
+    function simulateLiveSpeed() {
+        downloadStartTime = Date.now(); // Record the start time
+        liveDownloadSpeed = 0; // Start from 0
+        downloadInterval = setInterval(() => {
+            // Calculate elapsed time
+            const elapsedTime = (Date.now() - downloadStartTime) / 1000; // in seconds
+            
+            // Simulate the live download speed based on the elapsed time
+            // You can adjust this formula based on how you want to simulate the live speed
+            const adjustment = (Math.random() * 5 - 2.5); // Allow some fluctuation
+            liveDownloadSpeed = Math.max(0, liveDownloadSpeed + adjustment); // Ensure it doesn't go negative
+    
+            document.getElementById('live-speed').innerText = `Live Speed: ${liveDownloadSpeed.toFixed(2)} Mbps`;
+        }, 1000); // Update every second
+    }
+    
+    function fetchSpeedTest() {
+        fetch('/speedtest')
+            .then(response => response.json())
+            .then(data => {
+                const downloadSpeed = data.download_mbps < 1 ? 
+                    `${(data.download_kbps).toFixed(2)} Kbps` : 
+                    `${data.download_mbps.toFixed(2)} Mbps`;
+    
+                const uploadSpeed = data.upload_mbps < 1 ? 
+                    `${(data.upload_kbps).toFixed(2)} Kbps` : 
+                    `${data.upload_mbps.toFixed(2)} Mbps`;
+    
+                document.getElementById('download-speed').innerText = downloadSpeed;
+                document.getElementById('upload-speed').innerText = uploadSpeed;
+    
+                // Update live speed based on final result
+                liveDownloadSpeed = data.download_mbps; // Set the final download speed
+                document.getElementById('live-speed').innerText = `Live Speed: ${downloadSpeed}`; // Show the actual download speed
+    
+                // Update latency information
+                document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
+                document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`; // Convert to seconds
+                document.getElementById('ping').innerText = `${data.ping} ms`;
+            })
+            .catch(error => {
+                console.error('Error fetching speed test:', error);
+                document.getElementById('live-speed').innerText = "Error fetching speed.";
+            })
+            .finally(() => {
+                clearInterval(downloadInterval); // Stop the live updates
+                testing = false;
+                document.getElementById('startButton').style.display = 'inline';
+                document.getElementById('stopButton').style.display = 'none';
+            });
+    }
+    
+
+    document.getElementById('stopButton').onclick = function() {
+        alert('Speed test stopped (functionality not implemented).');
+        testing = false;
+        clearInterval(downloadInterval); // Stop live updates
+        this.style.display = 'none';
+        document.getElementById('startButton').style.display = 'inline';
+    };
+
+    // Show more info functionality
+    document.getElementById('showMoreLink').onclick = function() {
+        const latencyInfo = document.getElementById('latency-info');
+        if (latencyInfo.style.display === 'none' || latencyInfo.style.display === '') {
+            latencyInfo.style.display = 'block'; // Show the latency info
+        } else {
+            latencyInfo.style.display = 'none'; // Hide the latency info
+        }
+    };
+</script>
+
 </body>
 </html>
