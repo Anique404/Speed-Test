@@ -10,7 +10,7 @@
         body {
             background-color: rgb(25, 25, 50); /* Main background color */
             color: rgb(250, 250, 250);
-            font-family: Montserrat, Montserrat-Fixed, Avenir, "Avenir Next LT Pro", Corbel, "URW Gothic", source-sans-pro, sans-serif;
+            font-family: Montserrat, sans-serif;
             font-size: 20px;
             font-weight: 400;
             text-align: center;
@@ -174,7 +174,7 @@
                 </div>
                 Ping
             </h2>
-            <p id="ping-speed">---- <span class="speed-unit">ms</span></p>
+            <p id="ping-speed">---- <span class="speed-unit"></span></p>
         </div>
         <div class="card">
             <h2>
@@ -183,7 +183,7 @@
                 </div>
                 Download Speed
             </h2>
-            <p id="download-speed">---- <span class="speed-unit">Mbps</span></p>
+            <p id="download-speed">---- <span class="speed-unit"></span></p>
         </div>
         <div class="card">
             <h2>
@@ -192,12 +192,12 @@
                 </div>
                 Upload Speed
             </h2>
-            <p id="upload-speed">---- <span class="speed-unit">Mbps</span></p>
+            <p id="upload-speed">---- <span class="speed-unit"></span></p>
         </div>
     </div>
 </div>
 
-<br><br>
+
 <div class="live-speed" id="live-speed">Live Speed: ---- </div>
 <br>
 <div class="button-container">
@@ -236,7 +236,7 @@
             document.getElementById('download-speed').innerText = '----';
             document.getElementById('upload-speed').innerText = '----';
             document.getElementById('ping-speed').innerText = '----'; // Reset ping display
-            document.getElementById('live-speed').innerText = 'Live Speed: -- Mbps';
+            document.getElementById('live-speed').innerText = 'Live Speed: -- ';
             document.getElementById('latency-unloaded').innerText = '-- ms';
             document.getElementById('latency-loaded').innerText = '-- s';
 
