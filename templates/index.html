@@ -5,29 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internet Speed Test</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         body {
-            background-color: white; /* Main background color */
-            color: #fff;
-            font-family: Arial, sans-serif;
+            background-color: rgb(25, 25, 50); /* Main background color */
+            color: rgb(250, 250, 250);
+            font-family: Montserrat, Montserrat-Fixed, Avenir, "Avenir Next LT Pro", Corbel, "URW Gothic", source-sans-pro, sans-serif;
+            font-size: 20px;
+            font-weight: 400;
             text-align: center;
         }
         header {
             display: flex;
             justify-content: space-between;
             padding: 20px;
-            background-color: black; /* Header background color */
-            color: white; /* Header text color */
+            background-color: rgb(25, 25, 50); /* Header background color */
         }
+        
         header h1 {
             margin: 0;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 800;
         }
+        
+        header h1 a {
+            color: rgb(250, 250, 250); /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+        
+        header a {
+            color: rgb(250, 250, 250); /* Color for the Privacy link */
+            font-size: 28px;
+            font-weight: 800;
+            text-decoration: none; /* Remove underline */
+        }
+        
         .container {
             margin: 40px auto;
             max-width: 800px; /* Increased max width for the container */
@@ -39,7 +51,7 @@
             gap: 20px;
         }
         .card {
-            background-color: black; /* Card background color */
+            background-color: rgb(25, 25, 50); /* Card background color */
             border-radius: 8px;
             padding: 20px;
             flex: 1;
@@ -48,12 +60,44 @@
         .card h2 {
             margin: 0 0 10px;
         }
+        
         .card p {
-            font-size: 24px;
+            font-size: 24px; /* Keep the same font size for values */
+            margin: 5px 0; /* Space between lines */
         }
+
+        .speed-unit {
+            font-weight: 700; /* Bold for speed units */
+            color: #FFD700; /* Gold color for emphasis */
+        }
+        
+        .icon-ping {
+            color: #FFD700; /* Gold color for Ping */
+        }
+        
+        .icon-download {
+            color: #00FF00; /* Green color for Download */
+        }
+        
+        .icon-upload {
+            color: #1E90FF; /* Dodger Blue for Upload */
+        }
+        
+        .icon-container {
+            display: inline-flex; /* Allows for alignment and centering */
+            justify-content: center; /* Centers the icon within the circle */
+            align-items: center; /* Vertically centers the icon */
+            width: 50px; /* Adjust as needed for size */
+            height: 50px; /* Adjust as needed for size */
+            border: 2px solid white; /* Border color and thickness */
+            border-radius: 50%; /* Makes the border circular */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            margin-right: 10px; /* Space between icon and text */
+        }
+        
         .live-speed {
             font-size: 30px;
-            color: blue; /* Live speed color */
+            color: rgb(250, 250, 250); /* Live speed color */
             margin: 20px 0;
         }
         .button-container {
@@ -78,19 +122,22 @@
         footer {
             margin-top: 40px;
             padding: 20px;
-            background-color: black; /* Footer background color */
-            color: white; /* Footer text color */
+            background-color:rgb(50,50,50); 
+            color:rgb(250,250,250); /* Footer text color */
         }
         .latency-info {
-            color: black; /* Set the color for the latency section */
+            color: rgb(250, 250, 250);  /* Set the color for the latency section */
             margin-top: 20px;
+            width: 500px;
+            justify-content: center;
+            align-items: center;
         }
         
         .latency-details {
             display: flex;
             flex-direction: row; /* Stack items vertically */
             align-items: flex-start; /* Align to the left */
-            gap:200px;
+            gap: 200px;
         }
         
         .latency-details p {
@@ -100,7 +147,7 @@
         .show-more {
             margin-top: 20px;
             cursor: pointer;
-            color: blue;
+            color: #FFD700;
             text-decoration: underline;
         }
     </style>
@@ -108,52 +155,74 @@
 <body>
 
 <header>
-    <h1>Speed Test</h1>
+    <h1>
+        <i class="fas fa-rocket" style="color:white; margin-right: 10px;"></i>
+        <a href="/" style="color: white; text-decoration: none;">Speed Test</a>
+    </h1>
     <a href="/privacy">Privacy</a>
 </header>
 <br>
-<h1 style="color: black;">Internet Speed Tester</h1>
+<h1 style="color:rgb(250,250,250);">Internet Speed Tester</h1>
 <br>
 
 <div class="container">
     <div class="card-container">
         <div class="card">
-            <h2>Download Speed</h2>
-            <p id="download-speed">---- </p>
+            <h2>
+                <div class="icon-container">
+                    <i class="fas fa-bolt icon-ping"></i>
+                </div>
+                Ping
+            </h2>
+            <p id="ping-speed">---- <span class="speed-unit">ms</span></p>
         </div>
         <div class="card">
-            <h2>Upload Speed</h2>
-            <p id="upload-speed">---- </p>
+            <h2>
+                <div class="icon-container">
+                    <i class="fas fa-arrow-down icon-download"></i>
+                </div>
+                Download Speed
+            </h2>
+            <p id="download-speed">---- <span class="speed-unit">Mbps</span></p>
         </div>
-    </div>
-    <br><br>
-    <div class="live-speed" id="live-speed">Live Speed: ---- </div>
-    <br>
-    <div class="button-container">
-        <button id="startButton">Start</button>
-        <button id="stopButton" style="display: none;">Stop</button>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="show-more" id="showMoreLink">Show More Info</div>
-    <br>
-    
-    <div class="latency-info" id="latency-info" style="display: none;">
-        <h2>Latency</h2>
-        <hr>
-        <div class="latency-details">
-            <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
-            <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
-            <h3>Ping: <span id="ping">-- ms</span></h3>
+        <div class="card">
+            <h2>
+                <div class="icon-container">
+                    <i class="fas fa-arrow-up icon-upload"></i>
+                </div>
+                Upload Speed
+            </h2>
+            <p id="upload-speed">---- <span class="speed-unit">Mbps</span></p>
         </div>
     </div>
 </div>
+
+<br><br>
+<div class="live-speed" id="live-speed">Live Speed: ---- </div>
+<br>
+<div class="button-container">
+    <button id="startButton">Start</button>
+    <button id="stopButton" style="display: none;">Stop</button>
+</div>
+<br><br><br>
+<div class="show-more" id="showMoreLink">Show More Info</div>
+<br>
+
+<center>
+<div class="latency-info" id="latency-info" style="display: none;">
+    <h2 style="color: #1E90FF;">Latency</h2>
+    <hr>
+    <div class="latency-details">
+        <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
+        <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
+    </div>
+</div>
+</center>
     
 </div>
 
 <footer>
-    <p>&copy; 2024 Internet Speed Test. All rights reserved.</p>
+    <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
 </footer>
 
 <script>
@@ -166,18 +235,18 @@
             // Reset speeds in the cards and live speed display
             document.getElementById('download-speed').innerText = '----';
             document.getElementById('upload-speed').innerText = '----';
+            document.getElementById('ping-speed').innerText = '----'; // Reset ping display
             document.getElementById('live-speed').innerText = 'Live Speed: -- Mbps';
             document.getElementById('latency-unloaded').innerText = '-- ms';
             document.getElementById('latency-loaded').innerText = '-- s';
-            document.getElementById('ping').innerText = '-- ms';
 
             testing = true;
             this.style.display = 'none';
             document.getElementById('stopButton').style.display = 'inline';
-            
+
             // Start live speed simulation
             simulateLiveSpeed();
-            
+
             // Call the speed test endpoint
             fetchSpeedTest();
         }
@@ -193,7 +262,6 @@
             const elapsedTime = (Date.now() - downloadStartTime) / 1000; // in seconds
             
             // Simulate the live download speed based on the elapsed time
-            // You can adjust this formula based on how you want to simulate the live speed
             const adjustment = (Math.random() * 5 - 2.5); // Allow some fluctuation
             liveDownloadSpeed = Math.max(0, liveDownloadSpeed + adjustment); // Ensure it doesn't go negative
     
@@ -216,6 +284,9 @@
                 document.getElementById('download-speed').innerText = downloadSpeed;
                 document.getElementById('upload-speed').innerText = uploadSpeed;
     
+                // Update the ping speed display
+                document.getElementById('ping-speed').innerText = `${data.ping} ms`;
+    
                 // Update live speed based on final result
                 liveDownloadSpeed = data.download_mbps; // Set the final download speed
                 document.getElementById('live-speed').innerText = `Live Speed: ${downloadSpeed}`; // Show the actual download speed
@@ -223,7 +294,6 @@
                 // Update latency information
                 document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
                 document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`; // Convert to seconds
-                document.getElementById('ping').innerText = `${data.ping} ms`;
             })
             .catch(error => {
                 console.error('Error fetching speed test:', error);
