@@ -7,149 +7,363 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        body {
-            background-color: rgb(25, 25, 50); /* Main background color */
-            color: rgb(250, 250, 250);
-            font-family: Montserrat, sans-serif;
-            font-size: 20px;
-            font-weight: 400;
-            text-align: center;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: rgb(25, 25, 50); /* Header background color */
-        }
-        
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 800;
-        }
-        
-        header h1 a {
-            color: rgb(250, 250, 250); /* Link color */
-            text-decoration: none; /* Remove underline */
-        }
-        
-        header a {
-            color: rgb(250, 250, 250); /* Color for the Privacy link */
-            font-size: 28px;
-            font-weight: 800;
-            text-decoration: none; /* Remove underline */
-        }
-        
-        .container {
-            margin: 40px auto;
-            max-width: 800px; /* Increased max width for the container */
-        }
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            gap: 20px;
-        }
-        .card {
-            background-color: rgb(25, 25, 50); /* Card background color */
-            border-radius: 8px;
-            padding: 20px;
-            flex: 1;
-            min-width: 200px; /* Minimum width for cards */
-        }
-        .card h2 {
-            margin: 0 0 10px;
-        }
-        
-        .card p {
-            font-size: 24px; /* Keep the same font size for values */
-            margin: 5px 0; /* Space between lines */
-        }
+       /* Base styles */
+body {
+    background-color: rgb(25, 25, 50); /* Main background color */
+    color: rgb(250, 250, 250);
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-        .speed-unit {
-            font-weight: 700; /* Bold for speed units */
-            color: #FFD700; /* Gold color for emphasis */
-        }
-        
-        .icon-ping {
-            color: #FFD700; /* Gold color for Ping */
-        }
-        
-        .icon-download {
-            color: #00FF00; /* Green color for Download */
-        }
-        
-        .icon-upload {
-            color: #1E90FF; /* Dodger Blue for Upload */
-        }
-        
-        .icon-container {
-            display: inline-flex; /* Allows for alignment and centering */
-            justify-content: center; /* Centers the icon within the circle */
-            align-items: center; /* Vertically centers the icon */
-            width: 50px; /* Adjust as needed for size */
-            height: 50px; /* Adjust as needed for size */
-            border: 2px solid white; /* Border color and thickness */
-            border-radius: 50%; /* Makes the border circular */
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            margin-right: 10px; /* Space between icon and text */
-        }
-        
-        .live-speed {
-            font-size: 30px;
-            color: rgb(250, 250, 250); /* Live speed color */
-            margin: 20px 0;
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        button {
-            padding: 15px 30px; /* Increased padding for larger buttons */
-            border: none;
-            cursor: pointer;
-            font-size: 18px; /* Increased font size */
-            border-radius: 5px;
-            width: 150px; /* Fixed width for buttons */
-        }
-        #startButton {
-            background-color: green; /* Start button color */
-            color: white;
-        }
-        #stopButton {
-            background-color: red; /* Stop button color */
-            color: white;
-        }
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            background-color:rgb(50,50,50); 
-            color:rgb(250,250,250); /* Footer text color */
-        }
-        .latency-info {
-            color: rgb(250, 250, 250);  /* Set the color for the latency section */
-            margin-top: 20px;
-            width: 500px;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .latency-details {
-            display: flex;
-            flex-direction: row; /* Stack items vertically */
-            align-items: flex-start; /* Align to the left */
-            gap: 200px;
-        }
-        
-        .latency-details p {
-            margin: 5px 0; /* Space between lines */
-        }
-        
-        .show-more {
-            margin-top: 20px;
-            cursor: pointer;
-            color: #FFD700;
-            text-decoration: underline;
-        }
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(25, 25, 50); /* Header background color */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+}
+
+header h1 a {
+    color: rgb(250, 250, 250); /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+header a {
+    color: rgb(250, 250, 250); /* Color for the Privacy link */
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none; /* Remove underline */
+    margin-right: 30px; /* Add space between the title and the Privacy link */
+}
+
+.container {
+    margin: 120px auto 40px; /* Increased margin top to avoid overlap with fixed header */
+    max-width: 1200px; /* Increased max width for larger screens */
+    padding: 0 20px;
+}
+
+/* Adjust the heading below the header */
+h1 {
+    color: rgb(250, 250, 250);
+    margin-top: 100px; /* Add space below the fixed header */
+    font-size: 32px;
+}
+
+
+.container {
+    margin: 100px auto 40px; /* Added margin to avoid overlap with fixed header */
+    max-width: 1200px; /* Increased max width for larger screens */
+    padding: 0 20px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+}
+
+.card {
+    background-color: rgb(25, 25, 50); /* Card background color */
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    min-width: 280px; /* Minimum width for cards */
+    max-width: 320px; /* Max width for cards */
+}
+
+.card h2 {
+    margin: 0 0 10px;
+}
+
+.card p {
+    font-size: 24px; /* Keep the same font size for values */
+    margin: 5px 0; /* Space between lines */
+}
+
+.speed-unit {
+    font-weight: 700; /* Bold for speed units */
+    color: #FFD700; /* Gold color for emphasis */
+}
+
+.icon-ping {
+    color: #FFD700; /* Gold color for Ping */
+}
+
+.icon-download {
+    color: #00FF00; /* Green color for Download */
+}
+
+.icon-upload {
+    color: #1E90FF; /* Dodger Blue for Upload */
+}
+
+.icon-container {
+    display: inline-flex; /* Allows for alignment and centering */
+    justify-content: center; /* Centers the icon within the circle */
+    align-items: center; /* Vertically centers the icon */
+    width: 50px; /* Adjust as needed for size */
+    height: 50px; /* Adjust as needed for size */
+    border: 2px solid white; /* Border color and thickness */
+    border-radius: 50%; /* Makes the border circular */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.live-speed {
+    font-size: 30px;
+    color: rgb(250, 250, 250); /* Live speed color */
+    margin: 20px 0;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    padding: 15px 30px; /* Increased padding for larger buttons */
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    border-radius: 5px;
+    width: 150px; /* Fixed width for buttons */
+}
+
+#startButton {
+    background-color: green; /* Start button color */
+    color: white;
+}
+
+#stopButton {
+    background-color: red; /* Stop button color */
+    color: white;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgb(50, 50, 50);
+    color: rgb(250, 250, 250); /* Footer text color */
+}
+
+.latency-info {
+    color: rgb(250, 250, 250); /* Set the color for the latency section */
+    margin-top: 20px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.latency-details {
+    display: flex;
+    flex-direction: row; /* Stack items vertically */
+    align-items: flex-start; /* Align to the left */
+    gap: 20px; /* Reduced gap for better spacing */
+}
+
+.latency-details p {
+    margin: 5px 0; /* Space between lines */
+}
+
+.show-more {
+    margin-top: 20px;
+    cursor: pointer;
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+/* General Responsive Styles */
+@media (max-width: 1024px) {
+    /* Header Styling */
+    header {
+        padding: 15px;
+    }
+
+    /* Container padding adjustment for smaller screens */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Stacking the cards vertically for smaller screens */
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Cards take full width but with a max width */
+    .card {
+        width: 100%;
+        max-width: 600px; /* Max width for cards */
+        margin-bottom: 20px; /* Margin between stacked cards */
+    }
+
+    /* Stack buttons vertically and make them full width */
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%; /* Full-width buttons */
+    }
+}
+
+/* For devices with widths between 768px and 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Header font size adjustment for medium-sized screens */
+    header h1 {
+        font-size: 20px;
+    }
+
+    header a {
+        font-size: 24px;
+    }
+
+    /* Card layout and widths adjustment */
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* Latency info adjustment for medium screens */
+    .latency-info {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .latency-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .show-more {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+}
+
+/* For devices with widths between 480px and 768px */
+@media (min-width: 480px) and (max-width: 768px) {
+    /* Header font size adjustment for small to medium screens */
+    header h1 {
+        font-size: 18px;
+    }
+
+    header a {
+        font-size: 20px;
+    }
+
+    /* Card layout and widths adjustment */
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    /* Button and layout adjustments */
+    button {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px; /* Smaller button size */
+    }
+}
+
+/* For very small screens (320px to 480px) */
+@media (min-width: 320px) and (max-width: 480px) {
+    /* Header specific adjustments for small screens */
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: rgb(25, 25, 50);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+    }
+
+    header h1 {
+        font-size: 16px;
+        margin-left: 10px; /* Reduced margin */
+    }
+
+    header a {
+        font-size: 18px;
+        margin-right: 30px; /* Smaller font for the Privacy link */
+    }
+
+    /* Ensure the card takes full screen width on small devices */
+    .card {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    /* Adjust button for small screens */
+    button {
+        width: 100%;
+        font-size: 14px; /* Slightly smaller text */
+        padding: 10px 15px;
+    }
+
+    /* Card text and icon adjustments */
+    .card p {
+        font-size: 18px;
+    }
+
+    .card h2 {
+        font-size: 20px;
+    }
+
+    /* Adjust live-speed text */
+    .live-speed {
+        font-size: 18px;
+    }
+
+    /* Latency info */
+    .latency-info {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .latency-details h3 {
+        font-size: 14px;
+    }
+
+    .latency-details {
+        gap: 10px;
+    }
+
+    /* Show more link adjustments */
+    .show-more {
+        font-size: 14px;
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -162,8 +376,9 @@
     <a href="/privacy">Privacy</a>
 </header>
 <br>
-<h1 style="color:rgb(250,250,250);">Internet Speed Tester</h1>
 <br>
+<h1 style="color:rgb(250,250,250);">Internet Speed Tester</h1>
+
 
 <div class="container">
     <div class="card-container">

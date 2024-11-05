@@ -19,53 +19,162 @@
             padding: 0px;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background-color:rgb(50,50,50); /* Footer background color */
-            color:rgb(250,250,250); /* Header text color */
-        }
-        
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 800;
-        }
-        
-        header h1 a {
-            color:rgb(250,250,250); /* Link color */
-            text-decoration: none; /* Remove underline */
-        }
-        
-        header a {
-            color:rgb(250,250,250); /* Color for the Privacy link */
-            font-size: 28px;
-            font-weight: 800;
-            text-decoration: none; /* Remove underline */
-        }
-        
-        .cont{
-            padding-left:100px;
-            padding-right:100px;
-        }
+        /* General Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgb(50, 50, 50); /* Header background color */
+    color: rgb(250, 250, 250); /* Header text color */
+    position: relative;
+}
 
-        h1, h2, h3 {
-            color:rgb(250,250,250);
-        }
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+}
 
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            background-color:rgb(50,50,50); /* Footer background color */
-            color:rgb(250,250,250); /* Footer text color */
-            text-align:center;
-        }
+header h1 a {
+    color: rgb(250, 250, 250); /* Link color */
+    text-decoration: none; /* Remove underline */
+}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+header a {
+    color: rgb(250, 250, 250); /* Color for the Privacy link */
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none; /* Remove underline */
+}
+
+/* Padding adjustments for large screens */
+.cont {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* Common h1, h2, h3 styling */
+h1, h2, h3 {
+    color: rgb(250, 250, 250);
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgb(50, 50, 50); /* Footer background color */
+    color: rgb(250, 250, 250); /* Footer text color */
+    text-align: center;
+}
+
+/* General unordered list styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Media Query for Small Screens (320px - 480px) */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column; /* Stack header content vertically */
+        padding: 10px; /* Adjust header padding for smaller screens */
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 20px; /* Adjust font size for smaller screens */
+    }
+
+    header a {
+        font-size: 22px; /* Slightly smaller font size for Privacy link */
+    }
+
+    .cont {
+        padding-left: 20px; /* Adjust container padding */
+        padding-right: 20px; /* Adjust container padding */
+    }
+
+    footer {
+        padding: 15px; /* Reduce footer padding for smaller screens */
+        font-size: 14px; /* Smaller font size for footer */
+    }
+}
+
+/* Media Query for Medium Screens (480px - 768px) */
+@media (min-width: 480px) and (max-width: 768px) {
+    header {
+        padding: 10px; /* Keep header padding for medium screens */
+    }
+
+    header h1 {
+        font-size: 22px; /* Adjust font size */
+    }
+
+    header a {
+        font-size: 26px; /* Adjust Privacy link font size */
+    }
+
+    .cont {
+        padding-left: 40px; /* Slightly reduce container padding */
+        padding-right: 40px; /* Slightly reduce container padding */
+    }
+
+    footer {
+        padding: 20px; /* Keep footer padding consistent */
+        font-size: 16px; /* Increase footer font size slightly */
+    }
+}
+
+/* Media Query for Large Screens (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    header {
+        padding: 10px; /* Slightly larger padding for larger screens */
+    }
+
+    header h1 {
+        font-size: 22px; /* Default font size for header */
+    }
+
+    header a {
+        font-size: 26px; /* Default font size for Privacy link */
+    }
+
+    .cont {
+        padding-left: 60px; /* Increase container padding */
+        padding-right: 60px; /* Increase container padding */
+    }
+
+    footer {
+        padding: 25px; /* Increase footer padding */
+        font-size: 18px; /* Increase footer font size */
+    }
+}
+
+/* Media Query for Extra Large Screens (1024px and above) */
+@media (min-width: 1024px) {
+    header {
+        padding: 10px; /* Increase header padding for large screens */
+    }
+
+    header h1 {
+        font-size: 22px; /* Slightly larger font size for header */
+    }
+
+    header a {
+        font-size: 26px; /* Larger font size for Privacy link */
+    }
+
+    .cont {
+        padding-left: 80px; /* Increase container padding */
+        padding-right: 80px; /* Increase container padding */
+    }
+
+    footer {
+        padding: 30px; /* Increase footer padding */
+        font-size: 20px; /* Larger font size for footer */
+    }
+}
+
     </style>
 </head>
 <body>
