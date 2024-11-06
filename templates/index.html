@@ -8,580 +8,535 @@
     
     <style>
        /* Base styles */
-body {
-    background-color: rgb(25, 25, 50); /* Main background color */
-    color: rgb(250, 250, 250);
-    font-family: Montserrat, sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgb(25, 25, 50); /* Header background color */
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-}
-
-header h1 a {
-    color: rgb(250, 250, 250); /* Link color */
-    text-decoration: none; /* Remove underline */
-}
-
-header a {
-    color: rgb(250, 250, 250); /* Color for the Privacy link */
-    font-size: 28px;
-    font-weight: 800;
-    text-decoration: none; /* Remove underline */
-    margin-right: 30px; /* Add space between the title and the Privacy link */
-}
-
-.container {
-    margin: 120px auto 40px; /* Increased margin top to avoid overlap with fixed header */
-    max-width: 1200px; /* Increased max width for larger screens */
-    padding: 0 20px;
-}
-
-/* Adjust the heading below the header */
-h1 {
-    color: rgb(250, 250, 250);
-    margin-top: 100px; /* Add space below the fixed header */
-    font-size: 32px;
-}
-
-
-.container {
-    margin: 100px auto 40px; /* Added margin to avoid overlap with fixed header */
-    max-width: 1200px; /* Increased max width for larger screens */
-    padding: 0 20px;
-}
-
-.card-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 20px;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-}
-
-.card {
-    background-color: rgb(25, 25, 50); /* Card background color */
-    border-radius: 8px;
-    padding: 20px;
-    flex: 1;
-    min-width: 280px; /* Minimum width for cards */
-    max-width: 320px; /* Max width for cards */
-}
-
-.card h2 {
-    margin: 0 0 10px;
-}
-
-.card p {
-    font-size: 24px; /* Keep the same font size for values */
-    margin: 5px 0; /* Space between lines */
-}
-
-.speed-unit {
-    font-weight: 700; /* Bold for speed units */
-    color: #FFD700; /* Gold color for emphasis */
-}
-
-.icon-ping {
-    color: #FFD700; /* Gold color for Ping */
-}
-
-.icon-download {
-    color: #00FF00; /* Green color for Download */
-}
-
-.icon-upload {
-    color: #1E90FF; /* Dodger Blue for Upload */
-}
-
-.icon-container {
-    display: inline-flex; /* Allows for alignment and centering */
-    justify-content: center; /* Centers the icon within the circle */
-    align-items: center; /* Vertically centers the icon */
-    width: 50px; /* Adjust as needed for size */
-    height: 50px; /* Adjust as needed for size */
-    border: 2px solid white; /* Border color and thickness */
-    border-radius: 50%; /* Makes the border circular */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    margin-right: 10px; /* Space between icon and text */
-}
-
-.live-speed {
-    font-size: 30px;
-    color: rgb(250, 250, 250); /* Live speed color */
-    margin: 20px 0;
-}
-
-.button-container {
-    margin-top: 20px;
-}
-
-button {
-    padding: 15px 30px; /* Increased padding for larger buttons */
-    border: none;
-    cursor: pointer;
-    font-size: 18px; /* Increased font size */
-    border-radius: 5px;
-    width: 150px; /* Fixed width for buttons */
-}
-
-#startButton {
-    background-color: green; /* Start button color */
-    color: white;
-}
-
-#stopButton {
-    background-color: red; /* Stop button color */
-    color: white;
-}
-
-footer {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: rgb(50, 50, 50);
-    color: rgb(250, 250, 250); /* Footer text color */
-}
-
-.latency-info {
-    color: rgb(250, 250, 250); /* Set the color for the latency section */
-    margin-top: 20px;
-    width: 500px;
-    justify-content: center;
-    align-items: center;
-}
-
-.latency-details {
-    display: flex;
-    flex-direction: row; /* Stack items vertically */
-    align-items: flex-start; /* Align to the left */
-    gap: 160px; /* Reduced gap for better spacing */
-}
-
-.latency-details p {
-    margin: 5px 0; /* Space between lines */
-}
-
-.show-more {
-    margin-top: 20px;
-    cursor: pointer;
-    color: #FFD700;
-    text-decoration: underline;
-}
-
-/* General Responsive Styles */
-@media (max-width: 1024px) {
-    /* Header Styling */
-    header {
-        padding: 15px;
-    }
-
-    /* Container padding adjustment for smaller screens */
-    .container {
-        padding: 0 15px;
-    }
-
-    /* Stacking the cards vertically for smaller screens */
-    .card-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Cards take full width but with a max width */
-    .card {
-        width: 100%;
-        max-width: 600px; /* Max width for cards */
-        margin-bottom: 20px; /* Margin between stacked cards */
-    }
-
-    /* Stack buttons vertically and make them full width */
-    .button-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button {
-        width: 100%; /* Full-width buttons */
-    }
-    .latency-info {
-        color: rgb(250, 250, 250); /* Set the color for the latency section */
-        margin-top: 20px;
-        width: 500px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .latency-details {
-        display: flex;
-        flex-direction: row; /* Stack items vertically */
-        align-items: flex-start; /* Align to the left */
-        gap: 160px; /* Reduced gap for better spacing */
-    }
-    
-    .latency-details p {
-        margin: 5px 0; /* Space between lines */
-    }
-}
-
-/* For devices with widths between 768px and 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {
-    /* Header font size adjustment for medium-sized screens */
-    header h1 {
+       body {
+        background-color: rgb(25, 25, 50); /* Main background color */
+        color: rgb(250, 250, 250);
+        font-family: Montserrat, sans-serif;
         font-size: 20px;
-    }
-
-    header a {
-        font-size: 24px;
-    }
-
-    /* Card layout and widths adjustment */
-    .card-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 500px;
-    }
-
-    /* Latency info adjustment for medium screens */
-    .latency-info {
-        color: rgb(250, 250, 250); /* Set the color for the latency section */
-        margin-top: 20px;
-        width: 500px;
-        justify-content: center;
-        align-items: center;
+        font-weight: 400;
+        text-align: center;
+        margin: 0;
+        padding: 0;
     }
     
-    .latency-details {
-        display: flex;
-        flex-direction: row; /* Stack items vertically */
-        align-items: flex-start; /* Align to the left */
-        gap: 160px; /* Reduced gap for better spacing */
-    }
-    
-    .latency-details p {
-        margin: 5px 0; /* Space between lines */
-    }
-
-    button {
-        font-size: 16px;
-    }
-}
-
-/* For devices with widths between 480px and 768px */
-@media (min-width: 480px) and (max-width: 768px) {
-    /* Header font size adjustment for small to medium screens */
-    header h1 {
-        font-size: 18px;
-    }
-
-    header a {
-        font-size: 20px;
-    }
-
-    /* Card layout and widths adjustment */
-    .card {
-        width: 100%;
-        max-width: 400px;
-    }
-
-    /* Button and layout adjustments */
-    button {
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 20px; /* Smaller button size */
-    }
-    .latency-info {
-        color: rgb(250, 250, 250); /* Set the color for the latency section */
-        margin-top: 20px;
-        width: 500px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .latency-details {
-        display: flex;
-        flex-direction: row; /* Stack items vertically */
-        align-items: flex-start; /* Align to the left */
-        gap: 160px; /* Reduced gap for better spacing */
-    }
-    
-    .latency-details p {
-        margin: 5px 0; /* Space between lines */
-    }
-}
-
-/* For very small screens (320px to 480px) */
-@media (min-width: 320px) and (max-width: 480px) {
-    /* Header specific adjustments for small screens */
     header {
         display: flex;
         justify-content: space-between;
         padding: 10px;
-        background-color: rgb(25, 25, 50);
+        background-color: rgb(25, 25, 50); /* Header background color */
         position: fixed;
         width: 100%;
         top: 0;
         z-index: 100;
     }
-
-    header h1 {
-        font-size: 16px;
-        margin-left: 10px; /* Reduced margin */
+    
+    header p {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
     }
-
+    
+    header p a {
+        color: rgb(250, 250, 250); /* Link color */
+        text-decoration: none; /* Remove underline */
+    }
+    
     header a {
-        font-size: 18px;
-        margin-right: 30px; /* Smaller font for the Privacy link */
+        color: rgb(250, 250, 250); /* Color for the Privacy link */
+        font-size: 28px;
+        font-weight: 800;
+        text-decoration: none; /* Remove underline */
+        margin-right: 30px; /* Add space between the title and the Privacy link */
     }
-
-    /* Ensure the card takes full screen width on small devices */
+    
+    /* Container for page content */
+    .container {
+        margin: 120px auto 40px; /* Increased margin top to avoid overlap with fixed header */
+        max-width: 1200px; /* Increased max width for larger screens */
+        padding: 0 20px;
+    }
+    
+    /* Adjust the heading below the header */
+    h1 {
+        color: rgb(250, 250, 250);
+        margin-top: 100px; /* Add space below the fixed header */
+        font-size: 32px;
+    }
+    
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        gap: 20px;
+        flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    }
+    
     .card {
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
+        background-color: rgb(25, 25, 50); /* Card background color */
+        border-radius: 8px;
+        padding: 20px;
+        flex: 1;
+        min-width: 280px; /* Minimum width for cards */
+        max-width: 320px; /* Max width for cards */
     }
-
-    /* Adjust button for small screens */
-    button {
-        width: 100%;
-        font-size: 14px; /* Slightly smaller text */
-        padding: 10px 15px;
-    }
-
-    /* Card text and icon adjustments */
-    .card p {
-        font-size: 18px;
-    }
-
+    
     .card h2 {
-        font-size: 20px;
+        margin: 0 0 10px;
     }
-
-    /* Adjust live-speed text */
+    
+    .card p {
+        font-size: 24px; /* Keep the same font size for values */
+        margin: 5px 0; /* Space between lines */
+    }
+    
+    .speed-unit {
+        font-weight: 700; /* Bold for speed units */
+        color: #FFD700; /* Gold color for emphasis */
+    }
+    
+    /* Icon styles */
+    .icon-ping, .icon-download, .icon-upload {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px; /* Adjust as needed for size */
+        height: 50px; /* Adjust as needed for size */
+        border-radius: 50%; /* Make the border circular */
+        padding: 10px;
+        border: 2px solid #FFD700; /* Gold border for all icons */
+        transition: all 0.3s ease;
+    }
+    
+    .icon-ping {
+        background-color: rgba(255, 215, 0, 0.2); /* Light gold background */
+    }
+    
+    .icon-download {
+        background-color: rgba(0, 255, 0, 0.2); /* Light green background */
+    }
+    
+    .icon-upload {
+        background-color: rgba(30, 144, 255, 0.2); /* Light dodger blue background */
+    }
+    
+    /* Hover effects */
+    .icon-ping:hover {
+        background-color: rgba(255, 215, 0, 0.4); /* Darker gold on hover */
+        border-color: #FFD700;
+    }
+    
+    .icon-download:hover {
+        background-color: rgba(0, 255, 0, 0.4); /* Darker green on hover */
+        border-color: #00FF00;
+    }
+    
+    .icon-upload:hover {
+        background-color: rgba(30, 144, 255, 0.4); /* Darker blue on hover */
+        border-color: #1E90FF;
+    }
+    
+    /* Centering the container */
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    /* Live speed display */
     .live-speed {
-        font-size: 18px;
+        font-size: 100px; /* Increased font size */
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: white;
     }
-
+    
+    /* Button container and styles */
+    .button-container {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .button-container button {
+        padding: 10px;
+        font-size: 20px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        transition: background-color 0.3s;
+    }
+    
+    .button-container button:hover {
+        background-color: #0056b3;
+    }
+    
+    .button-container i {
+        color: white;
+    }
+    
+    footer {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: rgb(50, 50, 50);
+        color: rgb(250, 250, 250); /* Footer text color */
+    }
+    
     /* Latency info */
     .latency-info {
-        width: 100%;
-        padding: 10px;
+        color: rgb(250, 250, 250); /* Set the color for the latency section */
+        margin-top: 20px;
+        width: 500px;
+        justify-content: center;
+        align-items: center;
     }
-
-    .latency-details h3 {
-        font-size: 14px;
-    }
-
+    
     .latency-details {
-        gap: 120px;
+        display: flex;
+        flex-direction: row; /* Stack items vertically */
+        align-items: flex-start; /* Align to the left */
+        gap: 160px; /* Reduced gap for better spacing */
     }
-
-    /* Show more link adjustments */
+    
+    .latency-details p {
+        margin: 5px 0; /* Space between lines */
+    }
+    
     .show-more {
-        font-size: 14px;
+        margin-top: 20px;
+        cursor: pointer;
+        color: #FFD700;
+        text-decoration: underline;
     }
-}
-
-
+    
+    /* General Responsive Styles */
+    @media (max-width: 1024px) {
+        header {
+            padding: 15px;
+        }
+    
+        .container {
+            padding: 0 15px;
+        }
+    
+        .card-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .card {
+            width: 100%;
+            max-width: 600px; /* Max width for cards */
+            margin-bottom: 20px; /* Margin between stacked cards */
+        }
+    
+        .button-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        button {
+            width: 100%; /* Full-width buttons */
+        }
+    
+        .latency-info {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .latency-details {
+            gap: 60px; /* Reduced gap for better spacing */
+        }
+    }
+    
+    @media (min-width: 768px) and (max-width: 1024px) {
+        header p {
+            font-size: 20px;
+        }
+    
+        header a {
+            font-size: 24px;
+        }
+    
+        .card-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .live-speed {
+            font-size: 80px; /* Adjusted for smaller screens */
+        }
+    
+        .button-container button {
+            font-size: 18px; /* Adjust button font size */
+            width: 70px; /* Adjust button width */
+            height: 70px; /* Adjust button height */
+        }
+    
+        .card {
+            width: 100%;
+            max-width: 500px;
+        }
+    
+        button {
+            font-size: 16px;
+        }
+    }
+    
+    @media (min-width: 480px) and (max-width: 768px) {
+        header p {
+            font-size: 18px;
+        }
+    
+        header a {
+            font-size: 20px;
+        }
+    
+        .live-speed {
+            font-size: 60px; /* Smaller font size for live speed */
+        }
+    
+        .button-container button {
+            font-size: 14px; /* Smaller text in buttons */
+            width: 60px; /* Smaller button width */
+            height: 60px; /* Smaller button height */
+        }
+    
+        .card {
+            width: 100%;
+            max-width: 350px;
+        }
+    
+        footer {
+            font-size: 14px;
+        }
+    
+        .latency-info {
+            font-size: 16px;
+        }
+    }
+    @media (min-width: 320px) and (max-width: 480px) {
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px; /* Added padding for spacing */
+            background-color: rgb(25, 25, 50); /* Header background color */
+            position: fixed;
+            width: 100%; /* Ensure the header takes up full width */
+            top: 0;
+            z-index: 100;
+            box-sizing: border-box; /* Make sure padding doesn't affect layout */
+        }
+    
+        header p {
+            margin: 0;
+            font-size: 9px; /* Slightly reduced font size */
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            overflow: hidden; /* Prevent text overflow */
+            white-space: nowrap; /* Keep text on one line */
+            
+        }
+    
+        header p a {
+            color: rgb(250, 250, 250); /* Link color */
+            text-decoration: none; /* Remove underline */
+            font-size: 9px; /* Adjust font size for readability */
+            
+        }
+    
+        header a {
+            color: rgb(250, 250, 250); /* Privacy link color */
+            font-size: 9px; /* Font size adjusted for fit */
+            font-weight: 600;
+            text-decoration: none; /* Remove underline */
+            margin-right: 5px; /* Small margin to keep privacy link close to text */
+            word-wrap: break-word; /* Ensure the link breaks when needed */
+           
+        }
+    
+        .live-speed {
+            font-size: 0px; /* Even smaller font size for live speed */
+        }
+    
+        .button-container button {
+            font-size: 8px; /* Smaller text in buttons */
+            width: 40px; /* Smaller button width */
+            height: 40px; /* Smaller button height */
+        }
+    
+        .card {
+            width: 100%;
+            max-width: 260px; /* Further reduced card size for small screens */
+        }
+    
+        footer {
+            font-size: 9px; /* Adjusted footer font size */
+        }
+    
+        .latency-info {
+            font-size: 10px; /* Adjust latency info font size */
+        }
+    }
+    
+    
     </style>
 </head>
 <body>
 
-<header>
-    <h1>
-        <i class="fas fa-rocket" style="color:white; margin-right: 10px;"></i>
-        <a href="/" style="color: white; text-decoration: none;">Speed Test</a>
-    </h1>
-    <a href="/privacy">Privacy</a>
-</header>
-<br>
-<br>
-<h1 style="color:rgb(250,250,250);">Internet Speed Tester</h1>
-
-
-<div class="container">
-    <div class="card-container">
-        <div class="card">
-            <h2>
-                <div class="icon-container">
-                    <i class="fas fa-bolt icon-ping"></i>
-                </div>
-                Ping
-            </h2>
-            <p id="ping-speed">---- <span class="speed-unit"></span></p>
-        </div>
-        <div class="card">
-            <h2>
-                <div class="icon-container">
-                    <i class="fas fa-arrow-down icon-download"></i>
-                </div>
-                Download Speed
-            </h2>
-            <p id="download-speed">---- <span class="speed-unit"></span></p>
-        </div>
-        <div class="card">
-            <h2>
-                <div class="icon-container">
-                    <i class="fas fa-arrow-up icon-upload"></i>
-                </div>
-                Upload Speed
-            </h2>
-            <p id="upload-speed">---- <span class="speed-unit"></span></p>
-        </div>
-    </div>
-</div>
-
-
-<div class="live-speed" id="live-speed">Live Speed: ---- </div>
-<br>
-<div class="button-container">
-    <button id="startButton">Start</button>
-    <button id="stopButton" style="display: none;">Stop</button>
-</div>
-<br><br><br>
-<div class="show-more" id="showMoreLink">Show More Info</div>
-<br>
-
-<center>
-<div class="latency-info" id="latency-info" style="display: none;">
-    <h2 style="color: #1E90FF;">Latency</h2>
-    <hr>
-    <div class="latency-details">
-        <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
-        <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
-    </div>
-</div>
-</center>
     
-</div>
+    <header>
+        <p>
+            <i class="fas fa-tachometer-alt" style="color:white; font-size: 24px; margin-right: 10px;"></i>
+            <a href="/" style="color: white; text-decoration: none; font-size: 32px; font-weight: 600;">SpeedTest</a>
+        </p>
+        <a href="/privacy" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none; margin-left: 20px; padding: 10px 15px; border-radius: 5px; border: 2px solid white; transition: all 0.3s ease;">Privacy</a>
+    </header>
+    
+    
+    <h1 style="color:rgb(250,250,250); font-size:50px;">Internet Speed Tester</h1>
+    
+    <div class="container">
+        <div class="live-speed" id="live-speed">----</div>
+        <div class="button-container">
+            <button id="startButton"><i class="fas fa-play"></i></button>
+            <button id="stopButton" style="display: none;"><i class="fas fa-pause"></i></button>
+        </div>
+    </div>
+    
+    <!-- Card container and additional info -->
+    <div class="container card-container" id="cardContainer" style="display: none;">
+        <div class="card">
+            <h2><i class="fas fa-bolt icon-ping"></i> Ping</h2>
+            <p id="ping-speed">----</p>
+        </div>
+        <div class="card">
+            <h2><i class="fas fa-arrow-down icon-download"></i> Download Speed</h2>
+            <p id="download-speed">----</p>
+        </div>
+        <div class="card">
+            <h2><i class="fas fa-arrow-up icon-upload"></i> Upload Speed</h2>
+            <p id="upload-speed">----</p>
+        </div>
+    </div>
+    <br><br>
+    <div class="show-more" id="showMoreLink" onclick="toggleLatencyInfo()">Show More Info</div>
+    <br><br>
+    <center>
+        <div class="latency-info" id="latency-info" style="display: none;">
+            <h2 style="color: #1E90FF;">Latency</h2>
+            <hr>
+            <div class="latency-details">
+                <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
+                <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
+            </div>
+        </div>
+    </center>
+    
+    <footer>
+        <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        const startButton = document.getElementById("startButton");
+const stopButton = document.getElementById("stopButton");
+const liveSpeed = document.getElementById("live-speed");
+const cardContainer = document.getElementById("cardContainer");
+const showMoreLink = document.getElementById("showMoreLink");
+const latencyInfo = document.getElementById("latency-info");
 
-<footer>
-    <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
-</footer>
+let testing = false;
+let downloadInterval;
+let lastSpeed = 0;
 
-<script>
-    let testing = false;
+startButton.onclick = function () {
+    if (!testing) {
+        resetDisplay();
+        testing = true;
+        startButton.style.display = 'none';
+        stopButton.style.display = 'inline';
+
+        // Make cardContainer visible
+        cardContainer.style.display = 'flex';
+
+        simulateLiveSpeed(); // Start simulating live speed
+
+        fetchSpeedTest(); // Start the actual speed test
+    }
+};
+
+stopButton.onclick = function () {
+    alert('Speed test stopped.');
+    testing = false;
+    clearInterval(downloadInterval);
+    toggleButtonDisplay();
+};
+
+function toggleButtonDisplay() {
+    startButton.style.display = testing ? 'none' : 'inline';
+    stopButton.style.display = testing ? 'inline' : 'none';
+}
+
+function resetDisplay() {
+    liveSpeed.innerText = '----';
+    document.getElementById('download-speed').innerText = '----';
+    document.getElementById('upload-speed').innerText = '----';
+    document.getElementById('ping-speed').innerText = '----';
+    document.getElementById('latency-unloaded').innerText = '-- ms';
+    document.getElementById('latency-loaded').innerText = '-- s';
+}
+
+function simulateLiveSpeed() {
     let liveDownloadSpeed = 0;
-    let downloadInterval;
+    downloadInterval = setInterval(() => {
+        if (!testing) return; // Stop if testing is finished
+        liveDownloadSpeed = Math.max(0, liveDownloadSpeed + (Math.random() * 5 - 2.5));
+        liveSpeed.innerText = `${liveDownloadSpeed.toFixed(2)} Mbps`; // Simulate live speed
+    }, 1000); // Update every second
+}
 
-    document.getElementById('startButton').onclick = function() {
-        if (!testing) {
-            // Reset speeds in the cards and live speed display
-            document.getElementById('download-speed').innerText = '----';
-            document.getElementById('upload-speed').innerText = '----';
-            document.getElementById('ping-speed').innerText = '----'; // Reset ping display
-            document.getElementById('live-speed').innerText = 'Live Speed: -- ';
-            document.getElementById('latency-unloaded').innerText = '-- ms';
-            document.getElementById('latency-loaded').innerText = '-- s';
+function fetchSpeedTest() {
+    fetch('/speedtest') // Fetch actual speed data from server
+        .then(response => response.json())
+        .then(data => {
+            displayResults(data); // Display the results in the cards
+            testing = false;
+            clearInterval(downloadInterval); // Stop live speed simulation after real test finishes
+            toggleButtonDisplay();
+        })
+        .catch(error => {
+            console.error('Error fetching speed test:', error);
+            liveSpeed.innerText = "Error fetching speed.";
+        });
+}
 
-            testing = true;
-            this.style.display = 'none';
-            document.getElementById('stopButton').style.display = 'inline';
+function displayResults(data) {
+    // Final download and upload speeds are updated in both live speed and cards
+    liveSpeed.innerText = formatSpeed(data.download_mbps, data.download_kbps);
+    document.getElementById('download-speed').innerText = formatSpeed(data.download_mbps, data.download_kbps);
+    document.getElementById('upload-speed').innerText = formatSpeed(data.upload_mbps, data.upload_kbps);
+    document.getElementById('ping-speed').innerText = `${data.ping} ms`;
+    document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
+    document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`;
+}
 
-            // Start live speed simulation
-            simulateLiveSpeed();
+function formatSpeed(mbps, kbps) {
+    return mbps < 1 ? `${kbps.toFixed(2)} Kbps` : `${mbps.toFixed(2)} Mbps`;
+}
 
-            // Call the speed test endpoint
-            fetchSpeedTest();
-        }
-    };
-
-    let downloadStartTime; // Track when the download starts
-
-    function simulateLiveSpeed() {
-        downloadStartTime = Date.now(); // Record the start time
-        liveDownloadSpeed = 0; // Start from 0
-        downloadInterval = setInterval(() => {
-            // Calculate elapsed time
-            const elapsedTime = (Date.now() - downloadStartTime) / 1000; // in seconds
-            
-            // Simulate the live download speed based on the elapsed time
-            const adjustment = (Math.random() * 5 - 2.5); // Allow some fluctuation
-            liveDownloadSpeed = Math.max(0, liveDownloadSpeed + adjustment); // Ensure it doesn't go negative
+        
+    </script>
     
-            document.getElementById('live-speed').innerText = `Live Speed: ${liveDownloadSpeed.toFixed(2)} Mbps`;
-        }, 1000); // Update every second
-    }
+    </body>
+    </html>
     
-    function fetchSpeedTest() {
-        fetch('/speedtest')
-            .then(response => response.json())
-            .then(data => {
-                const downloadSpeed = data.download_mbps < 1 ? 
-                    `${(data.download_kbps).toFixed(2)} Kbps` : 
-                    `${data.download_mbps.toFixed(2)} Mbps`;
-    
-                const uploadSpeed = data.upload_mbps < 1 ? 
-                    `${(data.upload_kbps).toFixed(2)} Kbps` : 
-                    `${data.upload_mbps.toFixed(2)} Mbps`;
-    
-                document.getElementById('download-speed').innerText = downloadSpeed;
-                document.getElementById('upload-speed').innerText = uploadSpeed;
-    
-                // Update the ping speed display
-                document.getElementById('ping-speed').innerText = `${data.ping} ms`;
-    
-                // Update live speed based on final result
-                liveDownloadSpeed = data.download_mbps; // Set the final download speed
-                document.getElementById('live-speed').innerText = `Live Speed: ${downloadSpeed}`; // Show the actual download speed
-    
-                // Update latency information
-                document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
-                document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`; // Convert to seconds
-            })
-            .catch(error => {
-                console.error('Error fetching speed test:', error);
-                document.getElementById('live-speed').innerText = "Error fetching speed.";
-            })
-            .finally(() => {
-                clearInterval(downloadInterval); // Stop the live updates
-                testing = false;
-                document.getElementById('startButton').style.display = 'inline';
-                document.getElementById('stopButton').style.display = 'none';
-            });
-    }
-    
-
-    document.getElementById('stopButton').onclick = function() {
-        alert('Speed test stopped (functionality not implemented).');
-        testing = false;
-        clearInterval(downloadInterval); // Stop live updates
-        this.style.display = 'none';
-        document.getElementById('startButton').style.display = 'inline';
-    };
-
-    // Show more info functionality
-    document.getElementById('showMoreLink').onclick = function() {
-        const latencyInfo = document.getElementById('latency-info');
-        if (latencyInfo.style.display === 'none' || latencyInfo.style.display === '') {
-            latencyInfo.style.display = 'block'; // Show the latency info
-        } else {
-            latencyInfo.style.display = 'none'; // Hide the latency info
-        }
-    };
-</script>
-
-</body>
-</html>
