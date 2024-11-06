@@ -75,108 +75,145 @@ ul {
     list-style-type: none;
     padding: 0;
 }
-
-/* Media Query for Small Screens (320px - 480px) */
-@media (max-width: 480px) {
+//* Media Query for Extra Small Screens (max-width: 320px) */
+@media (max-width: 320px) {
     header {
-        flex-direction: column; /* Stack header content vertically */
-        padding: 10px; /* Adjust header padding for smaller screens */
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 10px;
+        background-color: rgb(25, 25, 50);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 100;
+        box-sizing: border-box;
     }
 
-    header h1 {
-        font-size: 20px; /* Adjust font size for smaller screens */
+    header p {
+        margin: 0;
+        font-size: 9px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    header p a {
+        color: rgb(250, 250, 250);
+        text-decoration: none;
+        font-size: 9px;
     }
 
     header a {
-        font-size: 22px; /* Slightly smaller font size for Privacy link */
+        color: rgb(250, 250, 250);
+        font-size: 9px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-right: 5px;
     }
 
     .cont {
-        padding-left: 20px; /* Adjust container padding */
-        padding-right: 20px; /* Adjust container padding */
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     footer {
-        padding: 15px; /* Reduce footer padding for smaller screens */
-        font-size: 14px; /* Smaller font size for footer */
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Media Query for Small Screens (320px - 480px) */
+@media (min-width: 320px) and (max-width: 480px) {
+   
+
+    .cont {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    footer {
+        padding: 15px;
+        font-size: 14px;
     }
 }
 
 /* Media Query for Medium Screens (480px - 768px) */
 @media (min-width: 480px) and (max-width: 768px) {
     header {
-        padding: 10px; /* Keep header padding for medium screens */
+        padding: 10px;
     }
 
     header h1 {
-        font-size: 22px; /* Adjust font size */
+        font-size: 22px;
     }
 
     header a {
-        font-size: 26px; /* Adjust Privacy link font size */
+        font-size: 26px;
     }
 
     .cont {
-        padding-left: 40px; /* Slightly reduce container padding */
-        padding-right: 40px; /* Slightly reduce container padding */
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
     footer {
-        padding: 20px; /* Keep footer padding consistent */
-        font-size: 16px; /* Increase footer font size slightly */
+        padding: 20px;
+        font-size: 16px;
     }
 }
 
 /* Media Query for Large Screens (768px - 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
     header {
-        padding: 10px; /* Slightly larger padding for larger screens */
+        padding: 10px;
     }
 
     header h1 {
-        font-size: 22px; /* Default font size for header */
+        font-size: 22px;
     }
 
     header a {
-        font-size: 26px; /* Default font size for Privacy link */
+        font-size: 26px;
     }
 
     .cont {
-        padding-left: 60px; /* Increase container padding */
-        padding-right: 60px; /* Increase container padding */
+        padding-left: 60px;
+        padding-right: 60px;
     }
 
     footer {
-        padding: 25px; /* Increase footer padding */
-        font-size: 18px; /* Increase footer font size */
+        padding: 25px;
+        font-size: 18px;
     }
 }
 
 /* Media Query for Extra Large Screens (1024px and above) */
 @media (min-width: 1024px) {
     header {
-        padding: 10px; /* Increase header padding for large screens */
+        padding: 10px;
     }
 
     header h1 {
-        font-size: 22px; /* Slightly larger font size for header */
+        font-size: 22px;
     }
 
     header a {
-        font-size: 26px; /* Larger font size for Privacy link */
+        font-size: 26px;
     }
 
     .cont {
-        padding-left: 80px; /* Increase container padding */
-        padding-right: 80px; /* Increase container padding */
+        padding-left: 80px;
+        padding-right: 80px;
     }
 
     footer {
-        padding: 30px; /* Increase footer padding */
-        font-size: 20px; /* Larger font size for footer */
+        padding: 30px;
+        font-size: 20px;
     }
 }
+
 
     </style>
 </head>
@@ -256,9 +293,10 @@ ul {
     
 </div>
 
-<footer>
-    <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
-</footer>
+ <footer>
+        <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
+        <p><a href="/contact-us" style="color:#1E90FF;">Contact-Us</a></p>
+    </footer>
 
 
 </body>

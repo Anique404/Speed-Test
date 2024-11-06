@@ -290,6 +290,15 @@
         button {
             font-size: 16px;
         }
+        .latency-info {
+            width: 100%;
+            max-width: 400px;
+        }
+    
+        .latency-details {
+            gap: 40px;
+            /* Stack items on top of each other */
+        }
     }
     
     @media (min-width: 480px) and (max-width: 768px) {
@@ -322,6 +331,15 @@
     
         .latency-info {
             font-size: 16px;
+        }
+        .latency-info {
+            width: 100%;
+            max-width: 400px;
+        }
+    
+        .latency-details {
+            gap: 100px;
+             /* Stack items on top of each other */
         }
     }
     @media (min-width: 320px) and (max-width: 480px) {
@@ -366,7 +384,7 @@
         }
     
         .live-speed {
-            font-size: 0px; /* Even smaller font size for live speed */
+            font-size: 40px; /* Even smaller font size for live speed */
         }
     
         .button-container button {
@@ -381,11 +399,16 @@
         }
     
         footer {
-            font-size: 9px; /* Adjusted footer font size */
+            font-size: 13px; /* Adjusted footer font size */
         }
     
         .latency-info {
-            font-size: 10px; /* Adjust latency info font size */
+            max-width: 100%;
+            font-size: 14px; /* Adjusted font size for readability */
+        }
+    
+        .latency-details {
+            gap: 120px;
         }
     }
     
