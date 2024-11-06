@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color:rgb(25,25,50); /* Main background color */
+            color:rgb(250,250,250);
+            font-family: Montserrat, sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            justify-content:center;
+            margin: 0;
+            padding: 0px;
+        }
+
+        /* General Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: rgb(25, 25, 50); /* Header background color */
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        header p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+        
+        header p a {
+            color: rgb(250, 250, 250); /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+        
+        header a {
+            color: rgb(250, 250, 250); /* Color for the Privacy link */
+            font-size: 28px;
+            font-weight: 800;
+            text-decoration: none; /* Remove underline */
+            margin-right: 30px; /* Add space between the title and the Privacy link */
+        }
+        footer {
+            margin-top: 40px;; /* Push the footer to the bottom */
+            background-color: rgb(50, 50, 50); /* Footer background color */
+            color: rgb(250, 250, 250); /* Footer text color */
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            bottom: 0;
+        }
+        
+        
+
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding-top: 40px; /* Adjust padding for header */
+        }
+
+        .contact-form-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 700px;
+            height:450px;
+        }
+
+        .contact-form-box h2 {
+            color: #1E90FF;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .contact-form-box label {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-box input,
+        .contact-form-box textarea {
+            height:70px;
+            width: 90%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .contact-form-box button {
+            width: 95%;
+            padding: 15px;
+            background-color: #1E90FF;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form-box button:hover {
+            background-color: #4169E1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>
+            <i class="fas fa-tachometer-alt" style="color:white; font-size: 24px; margin-right: 10px;"></i>
+            <a href="/" style="color: white; text-decoration: none; font-size: 32px; font-weight: 600;">SpeedTest</a>
+        </p>
+        <a href="/privacy" style="color: white; font-size: 20px; font-weight: 500; text-decoration: none; margin-left: 20px; padding: 10px 15px; border-radius: 5px; border: 2px solid white; transition: all 0.3s ease;">Privacy</a>
+    </header>
+
+    <main class="contact-container">
+        <div class="contact-form-box">
+            <h2>Contact Us <a href="/" style="color:#1E90FF;">Internet Speed Tester</a></h2>
+            <form id="contact-form">
+                <label for="email">Your contact email</label>
+                <input type="email" id="email" name="user_email" placeholder="Your email" required>
+
+                <label for="message">Message or bug report</label>
+                <textarea id="message" name="message" placeholder="Your message" required></textarea>
+
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
+        <p><a href="/contact-us" style="color:#1E90FF;">Contact-Us</a></p>
+    
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("IKN6s4U4RH2STAV2B"); // Replace with your actual Public Key
+        })();
+
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+            console.log("Email:", email);
+            console.log("Message:", message);
+
+            emailjs.sendForm('service_nfowq1a', 'template_6el0krb', this)
+                .then(function() {
+                    alert('Message sent successfully!');
+                }, function(error) {
+                    alert('Failed to send message. Error: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+</body>
+</html>

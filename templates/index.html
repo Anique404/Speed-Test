@@ -431,111 +431,123 @@
     </div>
     <br><br>
     <div class="show-more" id="showMoreLink" onclick="toggleLatencyInfo()">Show More Info</div>
-    <br><br>
-    <center>
-        <div class="latency-info" id="latency-info" style="display: none;">
-            <h2 style="color: #1E90FF;">Latency</h2>
-            <hr>
-            <div class="latency-details">
-                <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
-                <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
-            </div>
+<br><br>
+<center>
+    <div class="latency-info" id="latency-info" style="display: none;">
+        <h2 style="color: #1E90FF;">Latency</h2>
+        <hr>
+        <div class="latency-details">
+            <h3>Unloaded: <span id="latency-unloaded">-- ms</span></h3>
+            <h3>Loaded: <span id="latency-loaded">-- s</span></h3>
         </div>
-    </center>
-    
-    <footer>
-        <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
-    </footer>
-    
-    <script>
-        const startButton = document.getElementById("startButton");
-const stopButton = document.getElementById("stopButton");
-const liveSpeed = document.getElementById("live-speed");
-const cardContainer = document.getElementById("cardContainer");
-const showMoreLink = document.getElementById("showMoreLink");
-const latencyInfo = document.getElementById("latency-info");
+    </div>
+</center>
 
-let testing = false;
-let downloadInterval;
-let lastSpeed = 0;
+<footer>
+    <p>&copy; 2024 Internet <a href="/" style="color:#1E90FF;">Speed Test</a>. All rights reserved.</p>
+    <p><a href="/contact-us" style="color:#1E90FF;">Contact-Us</a></p>
 
-startButton.onclick = function () {
-    if (!testing) {
-        resetDisplay();
-        testing = true;
-        startButton.style.display = 'none';
-        stopButton.style.display = 'inline';
+</footer>
 
-        // Make cardContainer visible
-        cardContainer.style.display = 'flex';
+<script>
+    const startButton = document.getElementById("startButton");
+    const stopButton = document.getElementById("stopButton");
+    const liveSpeed = document.getElementById("live-speed");
+    const cardContainer = document.getElementById("cardContainer");
+    const showMoreLink = document.getElementById("showMoreLink");
+    const latencyInfo = document.getElementById("latency-info");
 
-        simulateLiveSpeed(); // Start simulating live speed
+    let testing = false;
+    let downloadInterval;
+    let lastSpeed = 0;
 
-        fetchSpeedTest(); // Start the actual speed test
+    startButton.onclick = function () {
+        if (!testing) {
+            resetDisplay();
+            testing = true;
+            startButton.style.display = 'none';
+            stopButton.style.display = 'inline';
+
+            // Make cardContainer visible
+            cardContainer.style.display = 'flex';
+
+            simulateLiveSpeed(); // Start simulating live speed
+
+            fetchSpeedTest(); // Start the actual speed test
+        }
+    };
+
+    stopButton.onclick = function () {
+        alert('Speed test stopped.');
+        testing = false;
+        clearInterval(downloadInterval);
+        toggleButtonDisplay();
+    };
+
+    function toggleButtonDisplay() {
+        startButton.style.display = testing ? 'none' : 'inline';
+        stopButton.style.display = testing ? 'inline' : 'none';
     }
-};
 
-stopButton.onclick = function () {
-    alert('Speed test stopped.');
-    testing = false;
-    clearInterval(downloadInterval);
-    toggleButtonDisplay();
-};
+    function resetDisplay() {
+        liveSpeed.innerText = '----';
+        document.getElementById('download-speed').innerText = '----';
+        document.getElementById('upload-speed').innerText = '----';
+        document.getElementById('ping-speed').innerText = '----';
+        document.getElementById('latency-unloaded').innerText = '-- ms';
+        document.getElementById('latency-loaded').innerText = '-- s';
+    }
 
-function toggleButtonDisplay() {
-    startButton.style.display = testing ? 'none' : 'inline';
-    stopButton.style.display = testing ? 'inline' : 'none';
-}
+    function simulateLiveSpeed() {
+        let liveDownloadSpeed = 0;
+        downloadInterval = setInterval(() => {
+            if (!testing) return; // Stop if testing is finished
+            liveDownloadSpeed = Math.max(0, liveDownloadSpeed + (Math.random() * 5 - 2.5));
+            liveSpeed.innerText = `${liveDownloadSpeed.toFixed(2)} Mbps`; // Simulate live speed
+        }, 1000); // Update every second
+    }
 
-function resetDisplay() {
-    liveSpeed.innerText = '----';
-    document.getElementById('download-speed').innerText = '----';
-    document.getElementById('upload-speed').innerText = '----';
-    document.getElementById('ping-speed').innerText = '----';
-    document.getElementById('latency-unloaded').innerText = '-- ms';
-    document.getElementById('latency-loaded').innerText = '-- s';
-}
+    function fetchSpeedTest() {
+        fetch('/speedtest') // Fetch actual speed data from server
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data); // Display the results in the cards
+                testing = false;
+                clearInterval(downloadInterval); // Stop live speed simulation after real test finishes
+                toggleButtonDisplay();
+            })
+            .catch(error => {
+                console.error('Error fetching speed test:', error);
+                liveSpeed.innerText = "Error fetching speed.";
+            });
+    }
 
-function simulateLiveSpeed() {
-    let liveDownloadSpeed = 0;
-    downloadInterval = setInterval(() => {
-        if (!testing) return; // Stop if testing is finished
-        liveDownloadSpeed = Math.max(0, liveDownloadSpeed + (Math.random() * 5 - 2.5));
-        liveSpeed.innerText = `${liveDownloadSpeed.toFixed(2)} Mbps`; // Simulate live speed
-    }, 1000); // Update every second
-}
+    function displayResults(data) {
+        // Final download and upload speeds are updated in both live speed and cards
+        liveSpeed.innerText = formatSpeed(data.download_mbps, data.download_kbps);
+        document.getElementById('download-speed').innerText = formatSpeed(data.download_mbps, data.download_kbps);
+        document.getElementById('upload-speed').innerText = formatSpeed(data.upload_mbps, data.upload_kbps);
+        document.getElementById('ping-speed').innerText = `${data.ping} ms`;
+        document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
+        document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`;
+    }
 
-function fetchSpeedTest() {
-    fetch('/speedtest') // Fetch actual speed data from server
-        .then(response => response.json())
-        .then(data => {
-            displayResults(data); // Display the results in the cards
-            testing = false;
-            clearInterval(downloadInterval); // Stop live speed simulation after real test finishes
-            toggleButtonDisplay();
-        })
-        .catch(error => {
-            console.error('Error fetching speed test:', error);
-            liveSpeed.innerText = "Error fetching speed.";
-        });
-}
+    function formatSpeed(mbps, kbps) {
+        return mbps < 1 ? `${kbps.toFixed(2)} Kbps` : `${mbps.toFixed(2)} Mbps`;
+    }
 
-function displayResults(data) {
-    // Final download and upload speeds are updated in both live speed and cards
-    liveSpeed.innerText = formatSpeed(data.download_mbps, data.download_kbps);
-    document.getElementById('download-speed').innerText = formatSpeed(data.download_mbps, data.download_kbps);
-    document.getElementById('upload-speed').innerText = formatSpeed(data.upload_mbps, data.upload_kbps);
-    document.getElementById('ping-speed').innerText = `${data.ping} ms`;
-    document.getElementById('latency-unloaded').innerText = `${data.latency_unloaded} ms`;
-    document.getElementById('latency-loaded').innerText = `${(data.latency_loaded / 1000).toFixed(2)} s`;
-}
+    // Toggle visibility of latency info and change text of the show-more link
+    function toggleLatencyInfo() {
+        if (latencyInfo.style.display === "none") {
+            latencyInfo.style.display = "block";
+            showMoreLink.textContent = "Show Less Info";
+        } else {
+            latencyInfo.style.display = "none";
+            showMoreLink.textContent = "Show More Info";
+        }
+    }
+</script>
 
-function formatSpeed(mbps, kbps) {
-    return mbps < 1 ? `${kbps.toFixed(2)} Kbps` : `${mbps.toFixed(2)} Mbps`;
-}
-
-        
-    </script>
     
     </body>
     </html>

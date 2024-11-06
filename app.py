@@ -13,6 +13,10 @@ def index():
 def privacy():
     return render_template('privacy.html')
 
+@app.route('/contact-us')
+def contact():
+    return render_template('contact-us.html')
+
 @app.route('/speedtest', methods=['GET'])
 def speed_test():
     st = speedtest.Speedtest()
